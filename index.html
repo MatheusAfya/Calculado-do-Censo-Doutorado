@@ -861,38 +861,38 @@
 
         }
 
-		        function atualizarSemaforo(nota, corHeatmap) {
-		            apagarSemaforo();
-		            const luzes = document.querySelectorAll('.luz');
-		            
-		            // Mapeamento da nota discreta para o índice da luz (0 a 4)
-		            // Nota 5 -> índice 4 (luz-5)
-		            // Nota 4 -> índice 3 (luz-4)
-		            // Nota 3 -> índice 2 (luz-3)
-		            // Nota 2 -> índice 1 (luz-2)
-		            // Nota 1/0 -> índice 0 (luz-1)
-		            
-		            let indiceLuz = -1;
-		
-		            if (nota === 5) {
-		                indiceLuz = 4;
-		            } else if (nota === 4) {
-		                indiceLuz = 3;
-		            } else if (nota === 3) {
-		                indiceLuz = 2;
-		            } else if (nota === 2) {
-		                indiceLuz = 1;
-		            } else if (nota === 1 || nota === 0) {
-		                indiceLuz = 0;
-		            }
-		
-		            if (indiceLuz !== -1 && luzes[indiceLuz]) {
-		                luzes[indiceLuz].classList.add('acesa');
-		                // Usar a cor do heatmap para a luz acesa
-		                luzes[indiceLuz].style.backgroundColor = corHeatmap;
-		                luzes[indiceLuz].style.color = corHeatmap; // Para o box-shadow
-		            }
-		        }
+		       function atualizarSemaforo(nota, corHeatmap) {
+  apagarSemaforo();
+  const luzes = document.querySelectorAll('.luz');
+  
+  // ... (código de mapeamento de nota para indiceLuz)
+  
+  let corFinal = corHeatmap; // Usa a cor do heatmap por padrão
+  let indiceLuz = -1; // ... (definição do índice)
+
+  if (nota === 5) {
+      indiceLuz = 4;
+      // **** CORREÇÃO: Forçar a cor azul para nota 5 ****
+      corFinal = '#00B0F0'; 
+  } else if (nota === 4) {
+      indiceLuz = 3;
+  } else if (nota === 3) {
+      indiceLuz = 2;
+  } else if (nota === 2) {
+      indiceLuz = 1;
+  } else if (nota === 1 || nota === 0) {
+      indiceLuz = 0;
+      // **** CORREÇÃO OPCIONAL: Forçar o vermelho para nota 0/1 ****
+      // corFinal = '#FF0000';
+  }
+
+  if (indiceLuz !== -1 && luzes[indiceLuz]) {
+      luzes[indiceLuz].classList.add('acesa');
+      // Usar a cor final para a luz acesa
+      luzes[indiceLuz].style.backgroundColor = corFinal;
+      luzes[indiceLuz].style.color = corFinal; // Para o box-shadow
+  }
+}
 
         function apagarSemaforo() {
             const luzes = document.querySelectorAll('.luz');
